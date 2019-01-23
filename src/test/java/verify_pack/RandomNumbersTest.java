@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RandomNumbersTest {
 
 	private Random random = new Random(System.currentTimeMillis());
-	private Supplier<Integer> randomInt = () -> random.nextInt(99) + 1;
+	private Supplier<Integer> randomInt = () -> random.nextInt(999) + 1;
 
 	//subject
 	Calculator calculator = new Calculator();
