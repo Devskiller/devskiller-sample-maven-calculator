@@ -8,16 +8,20 @@ import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 
 public class IllegalArgumentsTest {
 
-	@Test(expected = RuntimeException.class)
+	@Test
 	public void shouldThrowExceptionForDivisionByZero() {
 		//given
 		Calculator calculator = new Calculator();
 
-		//when
-		calculator.divide(10, 0);
+		try {
+			//when
+			calculator.divide(10, 0);
 
-		//then
-		failBecauseExceptionWasNotThrown(RuntimeException.class);
+			//then
+			failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+		} catch (IllegalArgumentException e) {
+			//ignore
+		}
 	}
 
 }
