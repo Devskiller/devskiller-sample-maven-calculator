@@ -1,69 +1,66 @@
 package verify_pack;
 
-import com.devskiller.calculator.Calculator;
+import java.util.Random;
+import java.util.function.BooleanSupplier;
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
+
 import org.junit.Test;
 
-import java.util.Random;
+import com.devskiller.calculator.Calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RandomNumbersTest {
 
-	Random random = new Random(System.currentTimeMillis());
+	private Random random = new Random(System.currentTimeMillis());
+	private Supplier<Integer> randomInt = () -> random.nextInt(99) + 1;
+
+	//subject
+	Calculator calculator = new Calculator();
 
 	@Test
 	public void shouldAddTwoRandomNumbers() {
-		//given
-		Calculator calculator = new Calculator();
-
-		//when
-		int a = random.nextInt(100);
-		int b = random.nextInt(100);
-		int result = calculator.add(a,b);
-
-		//then
-		assertThat(result).isEqualTo(a+b);
+		verifyThat(() -> {
+			int a = randomInt.get();
+			int b = randomInt.get();
+			return calculator.add(a, b) == (a + b);
+		});
 	}
+
 
 	@Test
 	public void shouldSubtractTwoRandomNumbers() {
-		//given
-		Calculator calculator = new Calculator();
-
-		//when
-		int a = random.nextInt(100);
-		int b = random.nextInt(100);
-		int result = calculator.subtract(a,b);
-
-		//then
-		assertThat(result).isEqualTo(a-b);
+		verifyThat(() -> {
+			int a = randomInt.get();
+			int b = randomInt.get();
+			return calculator.subtract(a, b) == (a - b);
+		});
 	}
 
 	@Test
 	public void shouldMultiplyTwoRandomNumbers() {
-		//given
-		Calculator calculator = new Calculator();
-
 		//when
-		int a = random.nextInt(100);
-		int b = random.nextInt(100);
-		int result = calculator.multiply(a,b);
-
-		//then
-		assertThat(result).isEqualTo(a*b);
+		verifyThat(() -> {
+			int a = randomInt.get();
+			int b = randomInt.get();
+			return calculator.multiply(a, b) == (a * b);
+		});
 	}
 
 	@Test
 	public void shouldDivideTwoRandomNumbers() {
-		//given
-		Calculator calculator = new Calculator();
+		verifyThat(() -> {
+			int a = randomInt.get();
+			int b = randomInt.get() * a;
+			return calculator.divide(b, a) == (b / a);
+		});
+	}
 
-		//when
-		int a = random.nextInt(100)+1;
-		int b = (random.nextInt(100)+1) * a;
-		int result = calculator.divide(b,a);
-
-		//then
-		assertThat(result).isEqualTo(b/a);
+	private static void verifyThat(final BooleanSupplier booleanSupplier) {
+		boolean result = IntStream.rangeClosed(1, 100)
+				.boxed()
+				.allMatch(i -> booleanSupplier.getAsBoolean());
+		assertThat(result).isTrue();
 	}
 }
