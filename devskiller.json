@@ -1,7 +1,14 @@
 {
-  "readOnlyFiles" : ["pom.xml"],
-  "verification" : {
-    "testNamePatterns" : [".*verify_pack.*"],
-    "pathPatterns" : ["**src/test/**/verify_pack**"]
-  }
+    "readOnlyFiles": [
+        "pom.xml",
+        "src/test/**/*.java"
+    ],
+    "verification": {
+        "testNamePatterns": [
+            ".*verify_pack.*"
+        ],
+        "pathPatterns": [
+            "**src/test/**/verify_pack**"
+        ]
+    }
 }
