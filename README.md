@@ -76,7 +76,7 @@ Here is an example project descriptor:
 ```
 
 You can find more details about the `devskiller.json` descriptor in our
-[documentation](https://devskiller.zendesk.com/hc/en-us/articles/360019530419-Programming-task-project-descriptor).
+[documentation]([https://devskiller.zendesk.com/hc/en-us/articles/360019530419-Programming-task-project-descriptor](https://help.devskiller.com/space/TSG/2897412197/Programming+task+project+descriptor)).
 
 ## Automatic verification with verification tests
 
